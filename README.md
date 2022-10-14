@@ -32,9 +32,8 @@
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Usage](#usage)
-    - [Cookiecutter template](#cookiecutter-template)
-    - [Manual setup](#manual-setup)
+  - [Usage](#usage)  
+    - [Run the environment](#run-the-environment)  
     - [Variables reference](#variables-reference)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -87,8 +86,6 @@ This is the result of my Masterthesis about cooperation between humans and auton
 
 ### Prerequisites
 
-The recommended method to install **Amazing GitHub Template** is by using [Cookiecutter](https://github.com/cookiecutter/cookiecutter). For manual install please refer to [manual setup section](#manual-setup).
-
 First, make a new virtualenv, clone the repository
 
 Virtualenv:
@@ -117,13 +114,14 @@ The easiest way to install the required packages into the newly created virtual 
 pip install -r requirements
 ```
 
-Then, to start up the Flask instance and the npm server (for the Flask-VUE-Bootstrap Architecture which the website is based on) run
+### Usage
+
+#### Run the environment
+To start up the Flask instance and the npm server (for the Flask-VUE-Bootstrap Architecture which the website is based on) run
 
 ```sh
 python launch.py
 ```
-
-### Usage
 
 #### Variables reference
 
