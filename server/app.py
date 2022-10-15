@@ -16,7 +16,7 @@ import gym
 import pettingzoo
 import ray
 
-options = [
+frameworks = [
     {
         'title': 'Gym',
         'version': gym.__version__
@@ -30,21 +30,41 @@ options = [
         'version': ray.__version__
     }
 ]
-options1=[{'policy': 'PPO'}, {'policy': 'F2P'}, {'policy': 'SP'}]
-options2=[{'algorithm': 'A2C'}, {'algorithm': 'PPO'}, {'algorithm': 'SAC'}, {'algorithm': 'F2P'}]
+environments = [{'title': env} for env in gym.envs.registry.all()]
+policies=[{'policy': 'PPO'}, {'policy': 'F2P'}, {'policy': 'SP'}]
+algorithms=[{'algorithm': 'A2C'}, {'algorithm': 'PPO'}, {'algorithm': 'SAC'}, {'algorithm': 'F2P'}]
 
 # Routes
 @app.route('/api', methods=['GET'])
 def api():
     return jsonify({'message': 'Hello World!'})
 
+@app.route('/frameworks', methods=['GET'])
+def all_frameworks():
+    return jsonify({
+        'status': 'success',
+        'frameworks': frameworks,        
+    })
+
 @app.route('/environments', methods=['GET'])
 def all_environments():
     return jsonify({
         'status': 'success',
-        'environments': options,
-        #'policy' : options1,
-        #'algorithm' : options2
+        'environments': environments,        
+    })
+
+@app.route('/policies', methods=['GET'])
+def all_policies():
+    return jsonify({
+        'status': 'success',
+        'policies': policies,
+    })
+
+@app.route('/algorithms', methods=['GET'])
+def all_algorithms():
+    return jsonify({
+        'status': 'success',
+        'algorithms': algorithms,
     })
 
 @app.route('/environments/select', methods=['POST'])
@@ -52,11 +72,9 @@ def initialize_environment():
     response_object = {'status': 'success'}
     if request.method == 'POST':
         post_data = request.get_json()
-        env = gym.make(post_data)
-        env.reset()
-        response_object[message] = 'Environment Initialized'
-
-    return env
+        print(post_data)
+        response_object['message'] = 'Environment Selected!'    
+    return jsonify(response_object)
 
 
 if __name__ == '__main__':
